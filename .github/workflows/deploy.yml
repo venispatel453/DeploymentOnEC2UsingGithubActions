@@ -22,7 +22,7 @@ jobs:
         run: docker build -t ${{ secrets.DOCKER_IMAGE_NAME }} .
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_IMAGE_NAME }}
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}
 
       - name: SSH into EC2 instance
         uses: appleboy/ssh-action@master

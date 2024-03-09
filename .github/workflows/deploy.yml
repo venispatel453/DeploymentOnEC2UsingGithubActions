@@ -20,11 +20,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t venisnginx .
-
-      - name: Tagging a image
-        run: docker tag venisnginx ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest
-
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest .
+        
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest
 

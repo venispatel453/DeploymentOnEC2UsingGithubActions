@@ -42,4 +42,4 @@ jobs:
         run: docker pull ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest
 
       - name: Run Docker container on EC2
-        run: docker run -d --name nginx-container -p 80:80 ${{ secrets.DOCKER_USERNAME }}/mynginx:latest
+        run: docker run -d --name nginx-container -p 80:80 ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest

@@ -21,8 +21,6 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t mynginx .
-      - name: Tagging the image 
-        run: docker tag mynginx $DOCKER_USERNAME/mynginx:latest
 
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/mynginx:latest

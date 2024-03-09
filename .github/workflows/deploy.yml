@@ -20,10 +20,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t mynginx .
-        
+        run: docker build -t venisnginx .
+
+      - name: Tagging a image
+        run: docker tag venisnginx $DOCKER_USERNAME/venisnginx:latest
+
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/mynginx:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest
 
       - name: AWS login
         uses: aws-actions/configure-aws-credentials@v4
@@ -40,7 +43,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
       
       - name: Pull Docker image on EC2
-        run: docker pull ${{ secrets.DOCKER_USERNAME }}/mynginx:latest
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest
 
       - name: Run Docker container on EC2
         run: docker run -d --name nginx-container -p 80:80 ${{ secrets.DOCKER_USERNAME }}/mynginx:latest

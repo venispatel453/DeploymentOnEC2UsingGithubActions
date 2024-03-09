@@ -1,4 +1,3 @@
-name: Deploy to EC2
 
 on:
   push:
@@ -13,18 +12,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-
-      - name: Build and push Docker image
-        run: |
-        
-          docker build -t venisnginx .
-         
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-         
-          docker tag mynginx  ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest
-          
-          docker push  ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest
-
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with: 
@@ -32,7 +19,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest .
         
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest

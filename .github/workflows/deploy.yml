@@ -37,5 +37,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker run -p 80:80 -d ${{ secrets.DOCKER_USERNAME}}/venisnginx:latest
+            sudo docker run -p 80:80 -d ${{ secrets.DOCKER_USERNAME}}/venisnginx:latest
       

@@ -36,9 +36,6 @@ jobs:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker run -p 80:80 -d ${{ secrets.DOCKER_USERNAME}}/venisnginx:latest
       
-      - name: Pull Docker image on EC2
-        run: docker pull ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest
-
-      - name: Run Docker container on EC2
-        run: docker run -d --name nginx-container -p 80:80 ${{ secrets.DOCKER_USERNAME }}/venisnginx:latest

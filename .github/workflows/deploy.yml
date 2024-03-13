@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - dev
+      - master
 
 jobs:
   deploy: 
@@ -37,5 +37,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            sudo docker run -p 80:80 -d  --restart=always ${{ secrets.DOCKER_USERNAME}}/venisnginx:latest
+            sudo systemctl start docker
+            sudo systemctl enable docker
+            sudo docker stop nginx_container
+            sudo docker rm nginx_container
+            sudo docker run -p 80:80 -d  --restart unless-stopped --name nginx_container ${{ secrets.DOCKER_USERNAME}}/venisnginx:latest
       
